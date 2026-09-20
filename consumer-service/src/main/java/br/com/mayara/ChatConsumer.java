@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import br.com.mayara.WebSocketServer;
 public class ChatConsumer {
  private static final String TOPIC = "chat-messages"; /// Nome do tópico Kafka do chat.
- private static final String BOOTSTRAP_SERVERS = "kafka:9092"; /// Endereços dos servidores Kafka.
+ //private static final String BOOTSTRAP_SERVERS = "kafka:9092"; /// Endereços dos servidores Kafka.
  private static final String GROUP_ID = "chat-consumer-group"; /// ID do grupo de consumidores Kafka.
  private static final Logger logger = LoggerFactory.getLogger(ChatConsumer.class);
 /// Instância do logger para registrar informações e erros.
@@ -35,7 +35,7 @@ public class ChatConsumer {
  public static void main(String[] args) {
     logger.info("Starting Chat Consumer.");
     Properties props = new Properties();
-    props.put("bootstrap.servers", BOOTSTRAP_SERVERS);
+    props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, System.getenv("KAFKA_BOOTSTRAP_SERVERS"));
     props.put("group.id", GROUP_ID);
     props.put("key.deserializer",
     "org.apache.kafka.common.serialization.StringDeserializer");
